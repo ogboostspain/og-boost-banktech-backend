@@ -2,7 +2,7 @@ package es.ogboost.banktech.infrastructure.adapters.repository;
 
 import es.ogboost.banktech.application.ports.CustomerRepositoryPort;
 import es.ogboost.banktech.domain.model.Customer;
-import es.ogboost.banktech.infrastructure.adapters.mapper.CustomerMapper;
+import es.ogboost.banktech.infrastructure.adapters.mapper.CustomerEntityMapper;
 import es.ogboost.banktech.infrastructure.adapters.repository.jpa.JpaCustomerRepository;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,9 @@ import java.util.Optional;
 public class CustomerRepositoryAdapter implements CustomerRepositoryPort {
 
     private final JpaCustomerRepository repository;
-    private final CustomerMapper mapper;
+    private final CustomerEntityMapper mapper;
 
-    public CustomerRepositoryAdapter(JpaCustomerRepository repository, CustomerMapper mapper) {
+    public CustomerRepositoryAdapter(JpaCustomerRepository repository, CustomerEntityMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -32,7 +32,7 @@ public class CustomerRepositoryAdapter implements CustomerRepositoryPort {
 
     @Override
     public List<Customer> findAll() {
-        return repository.findAll().stream().map(mapper::toDomain).toList();
+        return mapper.toDomainList(repository.findAll());
     }
 
     @Override

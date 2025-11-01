@@ -2,7 +2,7 @@ package es.ogboost.banktech.infrastructure.adapters.repository;
 
 import es.ogboost.banktech.application.ports.AccountRepositoryPort;
 import es.ogboost.banktech.domain.model.Account;
-import es.ogboost.banktech.infrastructure.adapters.mapper.AccountMapper;
+import es.ogboost.banktech.infrastructure.adapters.mapper.AccountEntityMapper;
 import es.ogboost.banktech.infrastructure.adapters.repository.jpa.JpaAccountRepository;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,9 @@ import java.util.Optional;
 public class AccountRepositoryAdapter implements AccountRepositoryPort {
 
     private final JpaAccountRepository repository;
-    private final AccountMapper mapper;
+    private final AccountEntityMapper mapper;
 
-    public AccountRepositoryAdapter(JpaAccountRepository repository, AccountMapper mapper) {
+    public AccountRepositoryAdapter(JpaAccountRepository repository, AccountEntityMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -32,7 +32,7 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
 
     @Override
     public List<Account> findAll() {
-        return repository.findAll().stream().map(mapper::toDomain).toList();
+        return mapper.toDomainList(repository.findAll());
     }
 
     @Override

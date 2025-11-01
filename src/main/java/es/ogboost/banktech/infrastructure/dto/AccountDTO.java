@@ -1,6 +1,5 @@
-package es.ogboost.banktech.infrastructure.adapters.repository.jpa.entity;
+package es.ogboost.banktech.infrastructure.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,22 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "accounts")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AccountDTO {
     private Long id;
-
     private String iban;
-
     private BigDecimal balance;
-
-    @Column(name = "customer_id")
     private Long customerId;
 }
