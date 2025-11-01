@@ -5,16 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Customer {
     private Long id;
-    private String accountNumber;
-    private BigDecimal balance;
-    private String accountType; // SAVINGS or CHECKING
-    private Long customerId;
+    private String firstName;
+    private String lastName;
+    private String dni;
+    private String email;
 }
