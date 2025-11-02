@@ -1,8 +1,9 @@
 package es.ogboost.banktech.infrastructure.controller.advice;
 
-import es.ogboost.banktech.domain.exception.AccountNotFoundException;
-import es.ogboost.banktech.domain.exception.CustomerNotFoundException;
+import es.ogboost.banktech.domain.exceptions.AccountNotFoundException;
+import es.ogboost.banktech.domain.exceptions.CustomerNotFoundException;
 import es.ogboost.banktech.infrastructure.controller.response.ApiResponse;
+import es.ogboost.banktech.infrastructure.messages.ExceptionMessages;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleEntityNotFound(EntityNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error("Entity not found: " + ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.ENTITY_NOT_FOUND + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(CustomerNotFoundException.class)
@@ -32,7 +33,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleCustomerNotFound(CustomerNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error(ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.CUSTOMER_NOT_FOUND + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(AccountNotFoundException.class)
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleAccountNotFound(AccountNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error(ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.ACCOUNT_NOT_FOUND + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(ApiResponse.error("Invalid request: " + ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.INVALID_REQUEST + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -60,7 +61,7 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(ApiResponse.error("Validation failed", errors));
+                .body(ApiResponse.error(ExceptionMessages.VALIDATION_FAILED, errors));
     }
 
     @ExceptionHandler(SecurityException.class)
@@ -68,7 +69,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleSecurity(SecurityException ex) {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
-                .body(ApiResponse.error("Access denied: " + ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.ACCESS_DENIED + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -77,7 +78,7 @@ public class GlobalExceptionHandler {
         ex.printStackTrace();
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("Unexpected server error: " + ex.getMessage()));
+                .body(ApiResponse.error(ExceptionMessages.UNEXPECTED_ERROR + ": " + ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -91,6 +92,6 @@ public class GlobalExceptionHandler {
         ex.printStackTrace();
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("Unhandled exception: " + ex.getMessage(), details));
+                .body(ApiResponse.error(ExceptionMessages.UNHANDLED_EXCEPTION + ": " + ex.getMessage(), details));
     }
 }

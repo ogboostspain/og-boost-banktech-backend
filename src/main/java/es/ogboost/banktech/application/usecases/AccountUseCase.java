@@ -1,7 +1,7 @@
 package es.ogboost.banktech.application.usecases;
 
 import es.ogboost.banktech.application.ports.AccountRepositoryPort;
-import es.ogboost.banktech.domain.exception.AccountNotFoundException;
+import es.ogboost.banktech.domain.exceptions.AccountNotFoundException;
 import es.ogboost.banktech.domain.model.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

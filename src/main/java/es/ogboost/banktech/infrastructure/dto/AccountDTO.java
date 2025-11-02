@@ -1,19 +1,28 @@
 package es.ogboost.banktech.infrastructure.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import es.ogboost.banktech.infrastructure.messages.ValidationMessages;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountDTO {
+
     private Long id;
-    private String iban;
+
+    @NotBlank(message = ValidationMessages.ACCOUNT_TYPE_REQUIRED)
+    private String accountType;
+
+    @NotNull(message = ValidationMessages.BALANCE_REQUIRED)
+    @Positive(message = ValidationMessages.BALANCE_POSITIVE)
     private BigDecimal balance;
+
     private Long customerId;
 }

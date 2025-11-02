@@ -2,14 +2,19 @@ package es.ogboost.banktech.infrastructure.controller;
 
 import es.ogboost.banktech.application.usecases.AccountUseCase;
 import es.ogboost.banktech.domain.model.Account;
+import es.ogboost.banktech.infrastructure.adapters.mapper.AccountMapper;
 import es.ogboost.banktech.infrastructure.controller.response.ApiResponse;
 import es.ogboost.banktech.infrastructure.dto.AccountDTO;
-import es.ogboost.banktech.infrastructure.adapters.mapper.AccountMapper;
+import es.ogboost.banktech.infrastructure.messages.ResponseMessages;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for managing accounts.
+ */
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
@@ -23,32 +28,34 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<AccountDTO>> create(@RequestBody AccountDTO dto) {
+    public ResponseEntity<ApiResponse<AccountDTO>> create(@Valid @RequestBody AccountDTO dto) {
         Account created = useCase.createAccount(mapper.toDomain(dto));
-        return ResponseEntity.ok(ApiResponse.ok("Account created successfully", mapper.toDto(created)));
+        return ResponseEntity.ok(ApiResponse.ok(ResponseMessages.ACCOUNT_CREATED, mapper.toDto(created)));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AccountDTO>> getById(@PathVariable Long id) {
         Account found = useCase.getAccount(id);
-        return ResponseEntity.ok(ApiResponse.ok("Account retrieved successfully", mapper.toDto(found)));
+        return ResponseEntity.ok(ApiResponse.ok(ResponseMessages.ACCOUNT_RETRIEVED, mapper.toDto(found)));
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<AccountDTO>>> getAll() {
         List<Account> accounts = useCase.getAllAccounts();
-        return ResponseEntity.ok(ApiResponse.ok("List of all accounts", mapper.toDtoList(accounts)));
+        return ResponseEntity.ok(ApiResponse.ok(ResponseMessages.ACCOUNT_LIST, mapper.toDtoList(accounts)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<AccountDTO>> update(@PathVariable Long id, @RequestBody AccountDTO dto) {
+    public ResponseEntity<ApiResponse<AccountDTO>> update(
+            @PathVariable Long id,
+            @Valid @RequestBody AccountDTO dto) {
         Account updated = useCase.updateAccount(id, mapper.toDomain(dto));
-        return ResponseEntity.ok(ApiResponse.ok("Account updated successfully", mapper.toDto(updated)));
+        return ResponseEntity.ok(ApiResponse.ok(ResponseMessages.ACCOUNT_UPDATED, mapper.toDto(updated)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         useCase.deleteAccount(id);
-        return ResponseEntity.ok(ApiResponse.ok("Account deleted successfully", null));
+        return ResponseEntity.ok(ApiResponse.ok(ResponseMessages.ACCOUNT_DELETED, null));
     }
 }

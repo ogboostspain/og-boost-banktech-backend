@@ -1,7 +1,7 @@
 package es.ogboost.banktech.application.usecases;
 
 import es.ogboost.banktech.application.ports.CustomerRepositoryPort;
-import es.ogboost.banktech.domain.exception.CustomerNotFoundException;
+import es.ogboost.banktech.domain.exceptions.CustomerNotFoundException;
 import es.ogboost.banktech.domain.model.Customer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
