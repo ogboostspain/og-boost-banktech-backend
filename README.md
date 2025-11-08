@@ -106,10 +106,10 @@ Ejemplo de error:
 
 ```json
 {
-  \success\: false
-  \message\: \Validation failed\
+  \success\: false,
+  \message\: \Validation failed\,
   \data\: {
-    \firstName\: \First name is required\
+    \firstName\: \First name is required\,
     \lastName\: \Last name is required\
   }
 }
@@ -121,16 +121,54 @@ Ejemplo de error:
 
 ```json
 {
-  \firstName\: \John\
-  \lastName\: \Doe\
-  \email\: \john.doe@example.com\
+  \firstName\: \John\,
+  \lastName\: \Doe\,
+  \email\: \john.doe@example.com\,
   \dni\: \12345678A\
 }
 ```
 
 ---
 
+## 📄 Documentación de la API (Swagger / OpenAPI)
+
+La documentación interactiva de la API se puede consultar en:
+
+- **Swagger UI:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI JSON:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+Esta documentación incluye:
+
+- Todos los endpoints de Customers y Accounts
+- Modelos de datos (DTOs)
+- Validaciones de entrada
+- Ejemplos de request/response
+
+Para extraer el JSON para uso en frontend:
+
+```bash
+curl http://localhost:8080/v3/api-docs -o openapi.json
+```
+
+---
+
+## 📚 Documentación de código (Javadoc)
+
+Se genera automáticamente con Maven:
+
+```bash
+mvn javadoc:javadoc
+```
+
+- Los Javadocs incluyen:
+  - Explicación de clases (`UseCases`, `Controllers`, `DTOs`)
+  - Descripción de métodos públicos y parámetros
+  - Notas sobre validaciones y respuestas de API
+
+El resultado se encuentra en: `target/site/apidocs/index.html`
+
+---
+
 ## 📌 Conclusión
 
 Esta aplicación sigue buenas prácticas de **arquitectura diseño y principios SOLID** asegurando que sea **escalable mantenible y testeable** mientras separa **dominio lógica de negocio y capa de presentación**.
-};
