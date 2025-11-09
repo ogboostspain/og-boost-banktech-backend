@@ -20,7 +20,10 @@ public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String iban;
+    private String accountType;
+
+    @Column(name = "account_number")
+    private String accountNumber;
 
     private BigDecimal balance;
 
