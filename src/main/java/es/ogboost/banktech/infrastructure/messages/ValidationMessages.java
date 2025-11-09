@@ -13,6 +13,9 @@ public final class ValidationMessages {
     /** Account type is required */
     public static final String ACCOUNT_TYPE_REQUIRED = "Account type is required";
 
+    /** Account number is required */
+    public static final String ACCOUNT_NUMBER_REQUIRED = "Account number is required";
+
     /** Balance is required */
     public static final String BALANCE_REQUIRED = "Balance is required";
 

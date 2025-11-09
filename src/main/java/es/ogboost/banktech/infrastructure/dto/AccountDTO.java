@@ -23,6 +23,13 @@ public class AccountDTO {
     )
     private Long id;
 
+    @NotBlank(message = ValidationMessages.ACCOUNT_NUMBER_REQUIRED)
+    @Schema(
+            description = "Number of the account (e.g., ES...)",
+            example = "ES..."
+    )
+    private String accountNumber;
+
     @NotBlank(message = ValidationMessages.ACCOUNT_TYPE_REQUIRED)
     @Schema(
             description = "Type of the account (e.g., Savings, Checking)",

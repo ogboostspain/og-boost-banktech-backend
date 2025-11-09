@@ -33,7 +33,7 @@ class AccountUseCaseTest {
         closeable = MockitoAnnotations.openMocks(this);
         account = TestDataFactory.baseAccount();
         updatedAccount = TestDataFactory.createAccount(
-                1L, "Checking", 1500.0, 1L
+                1L, "ES7620770024003102575766", "Checking", 1500.0, 1L
         );
     }
 

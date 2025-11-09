@@ -45,10 +45,10 @@ class AccountControllerTest {
         accountDTO = TestDataFactory.baseAccountDTO();
 
         updatedAccount = TestDataFactory.createAccount(
-                1L, "Checking", 1500.00, 1L
+                1L, "ES7620770024003102575766", "Checking", 1500.00, 1L
         );
         updatedAccountDTO = TestDataFactory.createAccountDTO(
-                1L, "Checking", 1500.00, 1L
+                1L, "ES7620770024003102575766","Checking", 1500.00, 1L
         );
     }
 
